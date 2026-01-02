@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinetra Cafe - Akkalkot</title>
+    <style>
+/* --- Social Media Icons --- */
+.social-links {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    transition: 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+    transform: scale(1.2);
+}
+        /* --- CSS Styles --- */
+        :root {
+            --primary-color: #ffb300; /* Gold/Yellow from sign */
+            --secondary-color: #e63946; /* Red accent */
+            --bg-dark: #1a1a1a;
+            --bg-darker:#0f0f0f;
+            --text-light: #f1f1f1;
+            --sidebar-width: 250px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            /*background-color: var(--bg-dark);*/
+            color: var(--text-light);
+        }
+
+        /* --- Sidebar Navigation Column --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-darker);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid var(--primary-color);
+            position: fixed;
+            height: 100%;
+        }
+
+        .brand {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            padding: 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid transparent;
+        }
+
+        .menu-links a:hover {
+            background-color: rgba(255, 179, 0, 0.2);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background-color: #252525;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            display: inline-block;
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+/* --- Menu Image Hover Effect --- */
+.menu-item-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.menu-item-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.menu-item-card:hover img {
+    display: block;
+}
+
+.menu-item-card:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.03);
+    transition: 0.3s ease;
+}
+
+        /* --- Menu Section Styles --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item-card {
+            background-color: var(--bg-darker);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .menu-item-card .price {
+            color: var(--primary-color);
+            font-weight: bold;
+            float: right;
+        }
+
+        /* --- Billing Section Styles --- */
+        .billing-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #aaa;
+        }
+
+        select, input[type="number"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--bg-darker);
+            color: var(--text-yellow);
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--bg-darker);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            height: 40px;
+        }
+
+        .btn:hover {
+            background-color: #e6a300;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            height: auto;
+        }
+        .btn-danger:hover {
+            background-color: #c9303c;
+        }
+
+        #billTable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #billTable th, #billTable td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #444;
+        }
+
+        #billTable th {
+            background-color: var(--bg-darker);
+            color: var(--primary-color);
+        }
+
+        .bill-total {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* --- Address & Contact Styles --- */
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        .contact-icon {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
+            .brand {
+                margin-bottom: 0;
+                font-size: 1.5rem;
+            }
+            .menu-links {
+                flex-direction: row;
+                gap: 5px;
+            }
+            .menu-links a {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+body {
+    background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+        url("C:\Users\SHANTLING\OneDrive\Desktop\project/swami.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="brand">Trinetra Cafe</div>
+        <ul class="menu-links">
+            
+            <li><a href="#menu-section">Menu</a></li>
+            <li><a href="#billing-section">Billing POS</a></li>
+            <li><a href="#contact-details">Contact Details</a></li>
+            <li><a href="#address-section">Address</a></li>
+ <li><a href="#about-us">About Us</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        
+        
+
+        <section id="menu-section">
+            <h2>Our Menu</h2>
+            
+            <h3>Snacks & Bites</h3>
+            <div class="menu-grid">
+               <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\veg burger.png" alt="Veg Burger">
+    <span>Veg Burger</span>
+    <span class="price">₹90</span>
+</div> 
+ <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\veg cheese burger.png" alt="Veg cheese Burger">
+    <span>Veg  cheese Burger</span>
+    <span class="price">₹110</span>
+</div>
+               
+               <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\french fries.png" alt="French Fries">
+    <span>Masala French Fries</span>
+    <span class="price">₹80</span>
+</div>
+ <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\veg noodles.png" alt="Veg Hakka Noodles">
+    <span>Veg Hakka Noodles</span>
+    <span class="price">₹120</span>
+</div>
+<div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\veg Noodles.png" alt="Schezwan Noodles">
+    <span>Schezwan Noodles</span>
+    <span class="price">₹140</span>
+</div>
+                
+              
+            </div>
+
+            <h3>Cold Drinks & Beverages</h3>
+            <div class="menu-grid">
+                <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\cold coffee.png" alt="Cold Coffee">
+    <span>Cold Coffee</span>
+    <span class="price">₹60</span>
+</div>
+<div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\Cold Coffee with Ice Cream.png" alt="Cold Coffee w/ Ice Cream">
+    <span>Cold Coffee w/ Ice Cream</span>
+    <span class="price">₹80</span>
+</div>
+           <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\chocolate milkshake.png" alt="Chocolate Milkshake">
+    <span>Chocolate Milkshake</span>
+    <span class="price">₹90</span>
+</div>
+            <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\Fresh Lime Soda.png" alt="Fresh Lime Soda">
+    <span>Fresh Lime Soda</span>
+    <span class="price">₹30</span>
+</div>     
+       <div class="menu-item-card">
+    <img src="C:\Users\SHANTLING\OneDrive\Desktop\project\Mineral Water.png" alt="Mineral Water (1L)">
+    <span>Mineral Water (1L)</span>
+    <span class="price">₹20</span>
+</div>     
+                
+                
+                
+            </div>
+        </section>
+
+        <section id="billing-section">
+            <h2>Quick Bill Maker</h2>
+            <p style="margin-bottom: 20px; color: #aaa;">Use this section to calculate customer orders.</p>
+
+            <div class="billing-controls">
+                <div class="control-group" style="flex: 2;">
+                    <label for="itemSelect">Select Product:</label>
+                    <select id="itemSelect">
+                        </select>
+                </div>
+                <div class="control-group" style="flex: 1;">
+                    <label for="quantityInput">Quantity:</label>
+                    <input type="number" id="quantityInput" value="1" min="1">
+                </div>
+                <button class="btn" id="addToBillBtn">Add to Bill</button>
+            </div>
+
+            <table id="billTable">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="billTableBody">
+                    </tbody>
+            </table>
+
+            <div class="bill-total">
+                Total Payable: ₹<span id="grandTotal">0</span>
+            </div>
+        </section>
+
+        <section id="contact-details">
+            <h2>Contact Details</h2>
+            <div class="contact-info">
+    <p><span class="contact-icon">👤</span> <strong>Owner / Manager Info:</strong></p>
+    <p>Suraj Dhumshetti (Mobile no: +91 9970901481)</p>
+
+    <p style="margin-top: 20px;"><strong>Follow Us:</strong></p>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/trinetracafe" target="_blank" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://www.facebook.com/trinetracafe" target="_blank" title="Facebook">
+            <i class="fa-brands fa-facebook"></i>
+        </a>
+
+        <a href="https://wa.me/919970901481" target="_blank" title="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+</div>
+
+        </section>
+
+        <section id="address-section">
+            <h2>Address & Location</h2>
+            <div class="contact-info">
+                <p>
+                    <span class="contact-icon">📍</span>
+                    Solapur Road, In Front Of Panchayat Sameeti,<br>
+                    Vidyanagar, Akkalkot,<br>
+                    Maharashtra 413216, India
+                </p>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3804.674763049878!2d76.20068907516814!3d17.52789398338391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDMxJzQwLjQiTiA3NsKwMTInMTEuOCJF!5e0!3m2!1sen!2sin!4v1709387590872!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="300" 
+                    style="border:0; border-radius: 8px; margin-top: 20px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+<section id="about-us">
+            <h2>About Us</h2>
+            <p>Welcome to <strong>Trinetra Cafe</strong>, Akkalkot's favorite spot for casual dining and vibrant evenings. Located conveniently on Solapur Road, we offer a lively atmosphere featuring colorful interiors and comfortable seating, perfect for catching up with friends or enjoying a quick bite.</p>
+            <br>
+            <p>We specialize in delicious snacks, hearty breakfast options, and refreshing cold drinks. Open late to serve your cravings!</p>
+        </section>
+
+    </main>
+
+    <script>
+        // 1. Define Menu Data for the Billing System
+        const cafeMenu = [
+            { id: 1, name: "Veg Burger", price: 90 },
+            { id: 2, name: "Veg Cheese Burger", price: 110 },
+            { id: 3, name: "Masala French Fries", price: 80 },
+            { id: 4, name: "Veg Hakka Noodles", price: 120 },
+            { id: 5, name: "Schezwan Noodles", price: 140 },
+            { id: 6, name: "Cold Coffee", price: 60 },
+            { id: 7, name: "Cold Coffee w/ Ice Cream", price: 80 },
+            { id: 8, name: "Chocolate Milkshake", price: 90 },
+            { id: 9, name: "Fresh Lime Soda", price: 50 },
+            { id: 10, name: "Mineral Water (1L)", price: 20 }
+        ];
+
+        // DOM Elements
+        const itemSelect = document.getElementById('itemSelect');
+        const quantityInput = document.getElementById('quantityInput');
+        const addToBillBtn = document.getElementById('addToBillBtn');
+        const billTableBody = document.getElementById('billTableBody');
+        const grandTotalSpan = document.getElementById('grandTotal');
+
+        let currentBillTotal = 0;
+
+        // 2. Populate the Select Dropdown on Page Load
+        function populateDropdown() {
+            cafeMenu.forEach((item, index) => {
+                const option = document.createElement('option');
+                // We store the index of the item in the array as the value
+                option.value = index; 
+                option.text = `${item.name} - ₹${item.price}`;
+                itemSelect.appendChild(option);
+            });
+        }
+
+        // 3. Function to Add Item to the Bill Table
+        function addItemToBill() {
+            const selectedIndex = itemSelect.value;
+            const selectedItem = cafeMenu[selectedIndex];
+            const quantity = parseInt(quantityInput.value);
+
+            if (quantity > 0) {
+                const lineTotal = selectedItem.price * quantity;
+
+                // Create a new table row
+                const row = billTableBody.insertRow();
+
+                // Insert cells
+                row.insertCell(0).innerText = selectedItem.name;
+                row.insertCell(1).innerText = "₹" + selectedItem.price;
+                row.insertCell(2).innerText = quantity;
+                row.insertCell(3).innerText = "₹" + lineTotal;
+                
+                // Action cell with delete button
+                const actionCell = row.insertCell(4);
+                const deleteBtn = document.createElement('button');
+                deleteBtn.innerText = "X";
+                deleteBtn.className = "btn btn-danger";
+                deleteBtn.onclick = function() {
+                    deleteRow(row, lineTotal);
+                };
+                actionCell.appendChild(deleteBtn);
+
+                // Update Grand Total
+                updateGrandTotal(lineTotal);
+
+                // Reset quantity back to 1 for convenience
+                quantityInput.value = 1;
+            } else {
+                alert("Please enter a valid quantity.");
+            }
+        }
+
+        // 4. Function to Delete a Row
+        function deleteRow(rowToDelete, lineTotalSubtract) {
+            rowToDelete.remove();
+            updateGrandTotal(-lineTotalSubtract); // Subtract the amount
+        }
+
+        // 5. Function to Update Grand Total Display
+        function updateGrandTotal(amountToAdd) {
+            currentBillTotal += amountToAdd;
+            grandTotalSpan.innerText = currentBillTotal;
+        }
+
+        // Initialize
+        populateDropdown();
+        addToBillBtn.addEventListener('click', addItemToBill);
+
+    </script>
+</body>
+</html>
